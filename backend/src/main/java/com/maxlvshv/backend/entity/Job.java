@@ -1,7 +1,9 @@
 package com.maxlvshv.backend.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -18,6 +20,8 @@ public class Job {
     private double salary;
     private String department;
     private LocalDateTime createdAt = LocalDateTime.now();
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Application> applications;
 
     public Long getId() {
         return id;
@@ -29,10 +33,6 @@ public class Job {
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {

@@ -9,23 +9,15 @@ import java.util.List;
 
 @Service
 public class StudentService {
-    private StudentRepository studentRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    private StudentRepository studentRepository;
+
+    public Student saveStudent(Student student) {
+        return studentRepository.save(student);
     }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-    }
-
-
-    public void saveStudent(Student student) {
-        studentRepository.save(student);
-    }
-
-    public void deleteStudent(Long id) {
-        studentRepository.deleteById(id);
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElse(null);
     }
 }
