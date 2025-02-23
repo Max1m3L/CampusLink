@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${job.title}"></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+  <h1 th:text="${job.title}"></h1>
+</header>
+<main>
+  <div class="job-details">
+    <p><strong>Тип:</strong> <span th:text="${job.type}"></span></p>
+    <p><strong>Заказчик:</strong> <span th:text="${job.employer}"></span></p>
+    <p><strong>Описание:</strong> <span th:text="${job.description}"></span></p>
+    <p><strong>Зарплата:</strong> <span th:text="${job.salary}"></span></p>
+    <a th:href="@{/apply/{id}(id=${job.id})}" class="btn">Подать заявку</a>
+  </div>
+</main>
+</body>
+</html>

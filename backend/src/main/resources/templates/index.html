@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вакансии и стажировки</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+    <h1>Вакансии и стажировки</h1>
+</header>
+<main>
+    <div class="job-list">
+        <div th:each="job : ${jobs}" class="job-card">
+            <h2 th:text="${job.getTitle()}"></h2>
+            <p><strong>Тип:</strong> <span th:text="${job.getType()}"></span></p>
+            <p><strong>Заказчик:</strong> <span th:text="${job.getEmployer()}"></span></p>
+            <p><strong>Описание:</strong> <span th:text="${job.getDescription()}"></span></p>
+            <p><strong>Отдел:</strong> <span th:text="${job.getDepartment}"></span></p>
+            <a th:href="@{/job/{id}(id=${job.getId()})}" class="btn">Подробнее</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>
