@@ -1,23 +1,69 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:text="${job.title}"></title>
   <link rel="stylesheet" href="/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-  <h1 th:text="${job.title}"></h1>
-</header>
-<main>
-  <div class="job-details">
-    <p><strong>Тип:</strong> <span th:text="${job.type}"></span></p>
-    <p><strong>Заказчик:</strong> <span th:text="${job.employer}"></span></p>
-    <p><strong>Описание:</strong> <span th:text="${job.description}"></span></p>
-    <p><strong>Зарплата:</strong> <span th:text="${job.salary}"></span></p>
-    <a th:href="@{/apply/{id}(id=${job.id})}" class="btn">Подать заявку</a>
+<div class="wrapper">
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <img src="/images/logo.png" alt="Логотип вуза">
+        <span>Уральский федеральный университет</span>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/jobs">Вакансии</a></li>
+          <li><a href="/about">О нас</a></li>
+          <li><a href="/contact">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="job-details">
+      <div class="container">
+        <h1 th:text="${job.title}"></h1>
+        <div class="job-info">
+          <p><strong>Тип:</strong> <span th:text="${job.type}"></span></p>
+          <p><strong>Заказчик:</strong> <span th:text="${job.employer}"></span></p>
+          <p><strong>Отдел:</strong> <span th:text="${job.department}"></span></p>
+          <p><strong>Зарплата:</strong> <span th:text="${job.salary}"></span></p>
+          <p><strong>Дата публикации:</strong> <span th:text="${#temporals.format(job.createdAt, 'dd.MM.yyyy')}"></span></p>
+        </div>
+        <div class="job-description">
+          <h2>Описание вакансии</h2>
+          <p th:text="${job.description}"></p>
+        </div>
+        <a th:href="@{/apply/{id}(id=${job.id})}" class="btn btn-primary">Подать заявку</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">
+      <img src="/images/logo.png" alt="Логотип вуза">
+      <span>Уральский федеральный университет</span>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="/about">О нас</a></li>
+        <li><a href="/contact">Контакты</a></li>
+        <li><a href="/privacy">Политика конфиденциальности</a></li>
+      </ul>
+    </div>
+    <div class="social-media">
+      <a href="https://vk.com/ural.federal.university" target="_blank"><img src="/images/vk.png" alt="VK"></a>
+      <a href="https://t.me/urfu_ru" target="_blank"><img src="/images/tg.png" alt="TG"></a>
+    </div>
   </div>
-</main>
+</footer>
 </body>
 </html>
