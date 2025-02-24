@@ -3,11 +3,11 @@ package com.maxlvshv.backend.conroller;
 import com.maxlvshv.backend.entity.Job;
 import com.maxlvshv.backend.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
@@ -36,5 +36,25 @@ public class JobController {
     public String showApplyForm(@PathVariable Long id, Model model) {
         model.addAttribute("jobId", id);
         return "apply";
+    }
+
+    @PostMapping("/job-add")
+    public ResponseEntity<?> addJob(@RequestBody Job job) {
+        try {
+            jobService.addJob(job);
+            return ResponseEntity.ok("Vacancy is created");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("can't create vacancy");
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<String> deleteJob(@PathVariable Long id) {
+        try {
+            jobService.deleteJob(id);
+            return ResponseEntity.ok("Vacancy was deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while deleting the vacancy");
+        }
     }
 }

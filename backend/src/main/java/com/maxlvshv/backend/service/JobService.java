@@ -24,4 +24,12 @@ public class JobService {
     public Job getJobById(Long id) {
         return jobRepository.findById(id).orElse(null);
     }
+
+    public void addJob(Job job) {
+        jobRepository.save(job);
+    }
+
+    public void deleteJob(Long id) {
+        jobRepository.deleteById(id);
+    }
 }

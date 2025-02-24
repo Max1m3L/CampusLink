@@ -33,7 +33,7 @@
           <p><strong>Тип:</strong> <span th:text="${job.type}"></span></p>
           <p><strong>Заказчик:</strong> <span th:text="${job.employer}"></span></p>
           <p><strong>Отдел:</strong> <span th:text="${job.department}"></span></p>
-          <p><strong>Зарплата:</strong> <span th:text="${job.salary}"></span></p>
+          <p><strong>Зарплата:</strong> <span th:text="${#numbers.formatDecimal(job.salary, 1, 0)}"></span></p>
           <p><strong>Дата публикации:</strong> <span th:text="${#temporals.format(job.createdAt, 'dd.MM.yyyy')}"></span></p>
         </div>
         <div class="job-description">
