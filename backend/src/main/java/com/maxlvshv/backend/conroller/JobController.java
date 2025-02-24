@@ -47,7 +47,7 @@ public class JobController {
             jobService.addJob(job);
             return ResponseEntity.ok("Vacancy is created");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("can't create vacancy");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Can't create vacancy");
         }
     }
 
