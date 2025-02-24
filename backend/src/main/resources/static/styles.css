@@ -247,3 +247,18 @@ body {
 .form-group textarea {
     resize: vertical;
 }
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background-color: #2157d2;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+}

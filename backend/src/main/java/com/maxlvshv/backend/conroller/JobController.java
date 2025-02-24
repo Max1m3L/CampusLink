@@ -2,15 +2,18 @@ package com.maxlvshv.backend.conroller;
 
 import com.maxlvshv.backend.entity.Job;
 import com.maxlvshv.backend.service.JobService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
+@Validated
 public class JobController {
     public final JobService jobService;
 
@@ -39,12 +42,12 @@ public class JobController {
     }
 
     @PostMapping("/job-add")
-    public ResponseEntity<?> addJob(@RequestBody Job job) {
+    public ResponseEntity<?> addJob(@Valid @RequestBody Job job) {
         try {
             jobService.addJob(job);
             return ResponseEntity.ok("Vacancy is created");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("can't create vacancy");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("can't create vacancy");
         }
     }
 

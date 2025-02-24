@@ -40,7 +40,10 @@
           <h2>Описание вакансии</h2>
           <p th:text="${job.description}"></p>
         </div>
-        <a th:href="@{/apply/{id}(id=${job.id})}" class="btn btn-primary">Подать заявку</a>
+        <div class="actions">
+          <a th:href="@{/apply/{id}(id=${job.id})}" class="btn btn-primary">Подать заявку</a>
+          <a href="javascript:history.back()" class="btn btn-secondary">Назад</a>
+        </div>
       </div>
     </section>
   </main>

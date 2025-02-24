@@ -1,6 +1,7 @@
 package com.maxlvshv.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,9 +13,10 @@ public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotEmpty(message = "Title can't be empty")
     private String title;
     private String description;
+    @NotEmpty(message = "Employer can't be empty")
     private String employer;
     private String type;
     private double salary;
