@@ -1,0 +1,175 @@
+openapi: 3.0.0
+info:
+  title: Job and Application API
+  description: API для управления вакансиями и заявками на них
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/
+paths:
+  /jobs:
+    get:
+      summary: Получить все вакансии
+      responses:
+        '200':
+          description: Успешно получены вакансии
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+    parameters:
+      - name: search
+        in: query
+        required: false
+        description: Поисковый запрос для фильтрации вакансий
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: Тип вакансии для фильтрации
+        schema:
+          type: string
+
+  /job/{id}:
+    get:
+      summary: Получить детали вакансии
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID вакансии
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешно получены детали вакансии
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Вакансия не найдена
+
+  /apply/{jobId}:
+    post:
+      summary: Подать заявку на вакансию
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: ID вакансии, на которую подается заявка
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Имя кандидата
+                email:
+                  type: string
+                  description: Email кандидата
+                message:
+                  type: string
+                  description: Сообщение или сопроводительное письмо
+      responses:
+        '302':
+          description: Заявка успешно подана и перенаправление на главную страницу
+        '404':
+          description: Вакансия не найдена
+
+  /apply/applications:
+    get:
+      summary: Получить все заявки текущего пользователя
+      responses:
+        '200':
+          description: Успешно получены заявки
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+
+  /job-add:
+    post:
+      summary: Добавить вакансию
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        '200':
+          description: Вакансия успешно создана
+        '500':
+          description: Ошибка при создании вакансии
+
+  /apply/delete/{id}:
+    post:
+      summary: Удалить заявку
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID заявки
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Заявка успешно удалена
+        '500':
+          description: Ошибка при удалении заявки
+
+  /delete/{id}:
+    post:
+      summary: Удалить вакансию
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID вакансии
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вакансия успешно удалена
+        '500':
+          description: Ошибка при удалении вакансии
+
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Java junior"
+        description:
+          type: string
+          example: "Responsible for developing software applications."
+        type:
+          type: string
+          example: "Full-time"
+
+    Application:
+      type: object
+      properties:
+        job:
+          $ref: '#/components/schemas/Job'
+        student:
+          type: string
+          example: "Иванов Иван Иванович"
+        email:
+          type: string
+          example: "Ivan.doe@example.com"
+        message:
+          type: string
+          example: "Хочу у вас работать"

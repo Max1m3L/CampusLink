@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Подать заявку</title>
+    <title>Мои заявки</title>
     <link rel="stylesheet" href="/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -26,32 +26,25 @@
             </nav>
         </div>
     </header>
-
     <main class="main-content">
-        <section class="apply-form">
+        <section class="my-applications">
             <div class="container">
-                <h1>Подать заявку</h1>
-                <form th:action="@{/apply/{id}(id=${jobId})}" method="post">
-                    <div class="form-group">
-                        <label for="name">ФИО:</label>
-                        <input type="text" id="name" name="name" required minlength="2" maxlength="100">
+                <h1>Мои заявки</h1>
+                <div class="applications">
+                    <div th:if="${#lists.isEmpty(applications)}">
+                        <h2>На данный момент заявок нет</h2>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
+                    <div th:if="${!#lists.isEmpty(applications)}" th:each="applic : ${applications}" class="application-card">
+                        <h3 th:text="${applic.job.title}"></h3>
+                        <p><strong>Статус:</strong> <span th:text="${applic.status}"></span></p>
+                        <p><strong>Дата подачи:</strong> <span th:text="${#temporals.format(applic.getCreatedAt(), 'dd.MM.yyyy')}"></span></p>
+                        <a th:href="@{/job/{id}(id=${applic.job.id})}" class="btn">Подробнее о вакансии</a>
                     </div>
-                    <div class="form-group">
-                        <label for="message">О себе/навыки:</label>
-                        <textarea id="message" name="message" rows="5" required maxlength="500"></textarea>
-                    </div>
-                    <div class="actions">
-                        <button type="submit" class="btn btn-primary">Отправить заявку</button>
-                        <a href="javascript:history.back()" class="btn btn-secondary">Назад</a>
-                    </div>
-                </form>
+                </div>
             </div>
         </section>
     </main>
+
 </div>
 
 <footer class="footer">
