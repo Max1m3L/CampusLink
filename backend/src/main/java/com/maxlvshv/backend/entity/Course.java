@@ -16,17 +16,17 @@ public class Course {
     private String name;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
-
-    @ManyToMany
-    @JoinTable(
-            name = "student_course",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
-    private List<Student> students;
+//    @ManyToOne
+//    @JoinColumn(name = "department_id")
+//    private Department department;
+//
+//    @ManyToMany
+//    @JoinTable(
+//            name = "student_course",
+//            joinColumns = @JoinColumn(name = "course_id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id")
+//    )
+//    private List<Student> students;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 }

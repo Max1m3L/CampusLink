@@ -12,9 +12,9 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+//    @ManyToOne
+//    @JoinColumn(name = "student_id")
+//    private Student student;
 
     private int rating;
     private String comment;

@@ -32,4 +32,20 @@ public class JobService {
     public void deleteJob(Long id) {
         jobRepository.deleteById(id);
     }
+
+    public List<Job> findJobs(String search, String type) {
+        if (search != null && !search.isEmpty() && type != null && !type.isEmpty()) {
+            return jobRepository.findByTitleContainingAndType(search, type);
+        } else if (search != null && !search.isEmpty()) {
+            return jobRepository.findByTitleContaining(search);
+        } else if (type != null && !type.isEmpty()) {
+            return jobRepository.findByType(type);
+        } else {
+            return jobRepository.findAll();
+        }
+    }
+
+    public List<String> getJobTypes() {
+        return jobRepository.findDistinctTypes();
+    }
 }

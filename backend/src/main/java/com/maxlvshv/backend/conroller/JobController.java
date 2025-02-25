@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping
 @Validated
@@ -59,5 +61,17 @@ public class JobController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while deleting the vacancy");
         }
+    }
+
+    @GetMapping("/jobs")
+    public String getJobs(@RequestParam(required = false) String search,
+                          @RequestParam(required = false) String type,
+                          Model model) {
+        List<Job> jobs = jobService.findJobs(search, type);
+        List<String> jobTypes = jobService.getJobTypes();
+
+        model.addAttribute("jobs", jobs);
+        model.addAttribute("jobTypes", jobTypes);
+        return "index";
     }
 }

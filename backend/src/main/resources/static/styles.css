@@ -262,3 +262,51 @@ body {
 .btn-secondary:hover {
     background-color: #7f8c8d;
 }
+
+.filters {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-weight: 500;
+}
+
+.filter-group input, .filter-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.my-applications {
+    padding: 50px 0;
+}
+
+.applications {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.application-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.application-card h3 {
+    margin-top: 0;
+}
+
+.application-card p {
+    margin: 10px 0;
+}

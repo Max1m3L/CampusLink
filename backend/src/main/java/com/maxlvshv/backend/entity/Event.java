@@ -18,17 +18,17 @@ public class Event {
     private LocalDateTime date;
     private String location;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
-
-    @ManyToMany
-    @JoinTable(
-            name = "student_event",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
-    private List<Student> participants;
+//    @ManyToOne
+//    @JoinColumn(name = "department_id")
+//    private Department department;
+//
+//    @ManyToMany
+//    @JoinTable(
+//            name = "student_event",
+//            joinColumns = @JoinColumn(name = "event_id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id")
+//    )
+//    private List<Student> participants;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 }

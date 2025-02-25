@@ -19,6 +19,7 @@
                 <ul>
                     <li><a href="/">Главная</a></li>
                     <li><a href="/jobs">Вакансии</a></li>
+                    <li><a href="/apply/applications">Мои заявки</a></li>
                     <li><a href="/about">О нас</a></li>
                     <li><a href="/contact">Контакты</a></li>
                 </ul>
@@ -32,11 +33,28 @@
                 <p>Мы предлагаем лучшие возможности для студентов и выпускников.</p>
             </div>
         </section>
-
         <section class="job-list">
             <div class="container">
-                <h2>Все вакансии</h2>
+                <h2>Последние вакансии</h2>
+                <form th:action="@{/}" method="get" class="filters">
+                    <div class="filter-group">
+                        <label for="search">Поиск:</label>
+                        <input type="text" id="search" name="search" th:value="${param.search}" placeholder="Название вакансии">
+                    </div>
+                    <div class="filter-group">
+                        <label for="type">Тип:</label>
+                        <select id="type" name="type">
+                            <option value="">Все</option>
+                            <option th:each="type : ${jobTypes}" th:value="${type}" th:text="${type}" th:selected="${param.type == type}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Применить фильтры</button>
+                </form>
+
                 <div class="jobs">
+                    <div th:if="${#lists.isEmpty(jobs)}" class="no-jobs">
+                        <h2>На данный момент никаких вакансий нет</h2>
+                    </div>
                     <div th:each="job : ${jobs}" class="job-card">
                         <h3 th:text="${job.title}"></h3>
                         <p><strong>Тип:</strong> <span th:text="${job.type}"></span></p>
